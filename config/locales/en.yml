@@ -31,4 +31,4 @@ en:
   errors:
     attributes:
       expired_at:
-        past_date: "When space time is breached and you are in the future!"
+        past_date: "When space time is breached and go back to the past!"
