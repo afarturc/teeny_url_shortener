@@ -1,7 +1,7 @@
 class Link < ApplicationRecord
   validate :expired_at_cannot_be_in_the_past
 
-  validates :original_url, :short_url, presence: true
+  validates :original_url, :short_url, :name, :description, presence: true
 
   belongs_to :user
   has_many :clicks, dependent: :destroy
