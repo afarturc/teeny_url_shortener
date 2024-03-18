@@ -3,7 +3,7 @@ class Link < ApplicationRecord
   has_many :clicks, dependent: :destroy
 
   validate :expires_at_cannot_be_in_the_past
-  validates :original_url, :short_url, :name, :description, presence: true
+  validates :original_url, :short_url, presence: true
 
   def expired?
     expires_at.present? && expires_at < Date.today

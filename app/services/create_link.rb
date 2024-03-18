@@ -12,8 +12,7 @@ class CreateLink
   end
 
   def perform
-    short_url = generate_short_url
-    short_link = Link.create!(original_url: link_params[:original_url], short_url:, user_id:)
+    short_link = Link.create!(**link_params, short_url: generate_short_url, user_id:)
     Result.new({ success?: true, link: short_link })
   rescue ActiveRecord::RecordInvalid => e
     Result.new({ success?: false, errors: e.record.errors.full_messages })
@@ -27,7 +26,7 @@ class CreateLink
     url = link_params[:original_url] + user_id.to_s
     hash = Digest::SHA256.hexdigest url
     encode = Base62.encode(hash.to_i(16))
-    "teeny.url/#{enconde.}"
+    "teeny.url/#{encode.chars.sample(8).join}"
   end
 
   attr_accessor :link_params, :user_id
