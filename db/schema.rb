@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_15_110103) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_14_165518) do
   create_table "clicks", force: :cascade do |t|
     t.string "device_ip", null: false
     t.string "system", null: false
@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_15_110103) do
     t.string "original_url", null: false
     t.string "short_url", null: false
     t.string "password"
-    t.date "expired_at"
+    t.date "expires_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false

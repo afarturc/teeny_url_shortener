@@ -1,20 +1,19 @@
 class Link < ApplicationRecord
-  validate :expired_at_cannot_be_in_the_past
-
-  validates :original_url, :short_url, :name, :description, presence: true
-
   belongs_to :user
   has_many :clicks, dependent: :destroy
 
+  validate :expires_at_cannot_be_in_the_past
+  validates :original_url, :short_url, :name, :description, presence: true
+
   def expired?
-    expired_at.present? && expired_at < Date.today
+    expires_at.present? && expires_at < Date.today
   end
 
   private
 
-  def expired_at_cannot_be_in_the_past
+  def expires_at_cannot_be_in_the_past
     return unless expired?
 
-    errors.add(:expired_at, :past_date)
+    errors.add(:expires_at, :past_date)
   end
 end
