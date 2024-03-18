@@ -1,0 +1,8 @@
+<%= turbo_frame_tag("short_url_list") do %>
+  <div class="mt-12">
+    <% @links.each do |link| %>
+      <%= render partial: "link_card", locals: { link: link } %>
+    <% end %>
+  </div>
+<% end %>
+

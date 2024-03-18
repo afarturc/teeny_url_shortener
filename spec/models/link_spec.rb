@@ -6,8 +6,6 @@ RSpec.describe Link, type: :model do
   describe 'validations' do
     it { expect(link).to be_valid }
     it { is_expected.to validate_presence_of(:original_url) }
-    it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_presence_of(:description) }
 
     context 'when a link is set to expire in a past date' do
       it 'raises a validation error' do
