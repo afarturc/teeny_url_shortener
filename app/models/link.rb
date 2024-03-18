@@ -2,7 +2,7 @@ class Link < ApplicationRecord
   belongs_to :user
   has_many :clicks, dependent: :destroy
 
-  validate :expires_at_cannot_be_in_the_past
+  validate :expired_at_cannot_be_in_the_past
   validates :original_url, :short_url, presence: true
 
   def expired?
