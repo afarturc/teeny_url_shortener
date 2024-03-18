@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   resources :links, only: %i[index show new create destroy]
+  get '/:short_url', to: 'clicks#create', as: 'create_click'
+
   # Defines the root path route ("/")
   root 'links#index'
 end

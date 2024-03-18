@@ -56,6 +56,9 @@ gem 'sidekiq', '~> 7.2'
 # https://github.com/sidekiq-cron/sidekiq-cron
 gem 'sidekiq-cron'
 
+# https://github.com/gshutler/useragent
+gem 'useragent', '~> 0.16.10'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]
