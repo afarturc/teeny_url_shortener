@@ -13,13 +13,12 @@ class LinksController < ApplicationController
 
   def create
     result = CreateLink.new(link_params, current_user.id).perform
+    @link = result.link
 
     if result.success?
       respond_to do |format|
-        format.html do
-          redirect_to(new_link_path, notice: '')
-        end
-        format.json { render json: { book: result.book }, status: :created }
+        format.turbo_stream
+        format.json { render json: { link: result.link }, status: :created }
       end
     else
       respond_to do |format|

@@ -8,5 +8,5 @@ Rails.application.routes.draw do
 
   resources :links, only: %i[index show new create]
   # Defines the root path route ("/")
-  root 'links#new'
+  root 'links#index'
 end
