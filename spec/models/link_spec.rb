@@ -9,7 +9,7 @@ RSpec.describe Link, type: :model do
 
     context 'when a link is set to expire in a past date' do
       it 'raises a validation error' do
-        expect { create(:link, expired_at: Date.yesterday) }.to raise_error(ActiveRecord::RecordInvalid)
+        expect { create(:link, expires_at: Date.yesterday) }.to raise_error(ActiveRecord::RecordInvalid)
       end
     end
   end
@@ -21,14 +21,14 @@ RSpec.describe Link, type: :model do
 
   describe '#expired?' do
     context 'when link is expired' do
-      let(:link) { build(:link, expired_at: Date.yesterday) }
+      let(:link) { build(:link, expires_at: Date.yesterday) }
       it 'must be true' do
         expect(link.expired?).to eq(true)
       end
     end
 
     context 'when link is not expired' do
-      let(:link) { build(:link, expired_at: Date.tomorrow) }
+      let(:link) { build(:link, expires_at: Date.tomorrow) }
       it 'must be false' do
         expect(link.expired?).to eq(false)
       end

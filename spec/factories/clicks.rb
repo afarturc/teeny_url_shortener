@@ -3,7 +3,7 @@ FactoryBot.define do
     device_ip { FFaker::Internet.ip_v4_address }
     system { 'Desktop' }
     browser { ['Firefox', 'Google Chrome', 'Safari'].sample }
-    language { 'EN' }
+    language { %w[EN PT FR].sample }
     platform { 'Mac OS' }
     link
   end
