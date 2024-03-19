@@ -24,7 +24,7 @@ class CreateLink
     return unless link_params[:original_url].present?
 
     url = link_params[:original_url] + user_id.to_s
-    hash = Digest::SHA256.hexdigest url
+    hash = Digest::SHA256.hexdigest(url)
     encode = Base62.encode(hash.to_i(16))
     encode.chars.sample(8).join
   end

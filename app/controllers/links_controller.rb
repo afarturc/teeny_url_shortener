@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Controller for links requests
 class LinksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_links, only: %i[index]
@@ -13,20 +12,21 @@ class LinksController < ApplicationController
   end
 
   def create
-    @result = CreateLink.new(link_params, current_user.id).perform
+    result = CreateLink.new(link_params, current_user.id).perform
+    @link = result.link
 
     if @result.success?
       respond_to do |format|
         format.turbo_stream
-        format.json { render json: { link: @result.link }, status: :created }
+        format.json { render json: { link: @link }, status: :created }
       end
     else
       respond_to do |format|
         format.html do
-          flash.now[:alert] = @result.errors
+          flash.now[:alert] = result.errors
           render :new, status: :unprocessable_entity
         end
-        format.json { render json: { errors: @result.errors }, status: :unprocessable_entity }
+        format.json { render json: { errors: result.errors }, status: :unprocessable_entity }
       end
     end
   end
