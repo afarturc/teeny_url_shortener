@@ -10,5 +10,7 @@ class CreateLinks < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
+
+    add_index :links, :short_url
   end
 end

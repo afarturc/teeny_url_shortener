@@ -32,6 +32,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_165518) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
+    t.index ["short_url"], name: "index_links_on_short_url"
   end
 
   create_table "users", force: :cascade do |t|
