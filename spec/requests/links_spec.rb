@@ -3,10 +3,9 @@ require 'rails_helper'
 RSpec.describe 'Links', type: :request do
   describe 'GET #index' do
     context 'when logged in' do
-      let(:user) { create(:user) }
+      include_context 'with logged user'
 
       before do
-        sign_in(user)
         5.times { create(:link, user:) }
         create(:link)
       end
