@@ -15,7 +15,7 @@ class LinksController < ApplicationController
   def create
     @result = CreateLink.new(link_params, current_user.id).perform
 
-    if result.success?
+    if @result.success?
       respond_to do |format|
         format.turbo_stream
         format.json { render json: { link: @result.link }, status: :created }
