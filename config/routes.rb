@@ -14,6 +14,8 @@ Rails.application.routes.draw do
                                                         as: 'clicks_most_popular_days_of_week'
     get '/statistics/clicks_most_popular_hours', to: 'statistics#clicks_most_popular_hours',
                                                  as: 'clicks_most_popular_hours'
+    get '/statistics/clicks_most_popular_languages', to: 'statistics#clicks_most_popular_languages',
+                                                     as: 'clicks_most_popular_languages'
   end
 
   # Defines the root path route ("/")

@@ -38,4 +38,8 @@
       <%= bar_chart link_clicks_most_popular_days_of_week_path(@link.id), empty: "No clicks found" %>
     </div>
   </div>
+  <div class="w-full border border-blue-900 rounded bg-slate-100 p-4 mb-4">
+    <p class="text-sm mb-4">Most popular languages</p>
+    <%= pie_chart link_clicks_most_popular_languages_path(@link.id), empty: "No clicks found" %>
+  </div>
 </div>
