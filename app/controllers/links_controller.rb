@@ -3,9 +3,11 @@
 class LinksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_links, only: %i[index]
-  before_action :set_link, only: %i[destroy]
+  before_action :set_link, only: %i[show destroy]
 
   def index; end
+
+  def show; end
 
   def new
     @link = Link.new

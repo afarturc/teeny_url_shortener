@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   resources :links, only: %i[index show new create destroy]
-  get '/:short_url', to: 'clicks#create', as: 'create_click'
+  get '/:short_url', to: 'clicks#redirect', as: 'redirect'
+
+  post '/statistics/:id/clicks_day', to: 'charts#clicks_day', as: 'clicks_day_chart'
+  post '/statistics/:id/clicks_hour', to: 'charts#clicks_hour', as: 'clicks_hour_chart'
 
   # Defines the root path route ("/")
   root 'links#index'

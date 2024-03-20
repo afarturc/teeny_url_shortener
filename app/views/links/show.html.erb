@@ -1,0 +1,40 @@
+<div class="flex flex-col w-1/2 mx-auto">
+  <div class="flex flex-row w-full mb-2">
+    <h1 class="font-bold text-xl"><%= @link.short_url %></h1>
+  </div>
+  <p class="mb-3"><%= @link.original_url %></p>
+  <div class="flex flex-row gap-2 mb-8 items-center">
+    <%= inline_svg_tag("calendar.svg", class: "size-5") %>
+    <p><%= @link.created_at.to_date %></p>
+  </div>
+  <div class="border border-blue-900 rounded bg-slate-100 p-4">
+    <div class="flex flex-row justify-between mb-8">
+      <div class="flex flex-row">
+        <div class="flex flex-col mr-12">
+          <p class="text-sm">Total clicks</p>
+          <p class="font-bold text-sm"><%= @link.clicks.count %></p>
+        </div>
+        <div class="flex flex-col">
+          <p class="text-sm">Last click</p>
+          <p class="font-bold text-sm">
+            <% if @link.clicks.last %>
+              <%= time_ago_in_words(@link.clicks.last.created_at) %>
+            <% else %>
+              No one clicked
+            <% end %>
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-row border border-blue-900 rounded-xl p-2 shadow" >
+        <div class="border-r border-blue-900 px-2 text-gray-900 hover:text-blue-900 hover:cursor-pointer" >
+          <%= button_to "Days", clicks_day_chart_path(@link.id) %>
+        </div>
+        <div class="px-2 hover:text-blue-900 text-blue-900 hover:cursor-pointer">
+          <%= button_to "Hours", clicks_hour_chart_path(@link.id) %>
+        </div>
+      </div>
+    </div>
+    <%= turbo_frame_tag("chart") do %>
+    <% end %>
+  </div>
+</div>

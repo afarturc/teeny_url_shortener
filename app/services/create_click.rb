@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Service class to create a click
 class CreateClick
   Result = Struct.new(:success?, :click, :errors, keyword_init: true)
 

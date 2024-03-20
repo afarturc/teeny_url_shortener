@@ -59,6 +59,15 @@ gem 'sidekiq-cron'
 # https://github.com/gshutler/useragent
 gem 'useragent', '~> 0.16.10'
 
+# https://github.com/jamesmartin/inline_svg
+gem 'inline_svg'
+
+# https://github.com/ankane/chartkick
+gem 'chartkick'
+
+# https://github.com/ankane/groupdate
+gem 'groupdate'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]
