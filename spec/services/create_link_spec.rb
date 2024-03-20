@@ -32,7 +32,7 @@ RSpec.describe CreateLink do
         ["Original url can't be blank", "Short url can't be blank"]
       end
 
-      it 'creates a link' do
+      it 'does not create a link' do
         aggregate_failures do
           expect { create_link }.not_to change(Link, :count)
           expect(create_link.success?).to eq(false)
