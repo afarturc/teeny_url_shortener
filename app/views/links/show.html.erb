@@ -7,7 +7,7 @@
     <%= inline_svg_tag("calendar.svg", class: "size-5") %>
     <p><%= @link.created_at.to_date %></p>
   </div>
-  <div class="border border-blue-900 rounded bg-slate-100 p-4">
+  <div class="border border-blue-900 rounded bg-slate-100 p-4 mb-4">
     <div class="flex flex-row justify-between mb-8">
       <div class="flex flex-row">
         <div class="flex flex-col mr-12">
@@ -25,16 +25,17 @@
           </p>
         </div>
       </div>
-      <div class="flex flex-row border border-blue-900 rounded-xl p-2 shadow" >
-        <div class="border-r border-blue-900 px-2 text-gray-900 hover:text-blue-900 hover:cursor-pointer" >
-          <%= button_to "Days", clicks_day_chart_path(@link.id) %>
-        </div>
-        <div class="px-2 hover:text-blue-900 text-blue-900 hover:cursor-pointer">
-          <%= button_to "Hours", clicks_hour_chart_path(@link.id) %>
-        </div>
-      </div>
     </div>
-    <%= turbo_frame_tag("chart") do %>
-    <% end %>
+    <%= line_chart link_clicks_last_30_days_path(@link.id), empty: "No clicks found for the last 30 days" %>
+  </div>
+  <div class="flex flex-row gap-4">
+    <div class="w-1/2 border border-blue-900 rounded bg-slate-100 p-4 mb-4">
+      <p class="text-sm mb-4">Most popular hours</p>
+      <%= column_chart link_clicks_most_popular_hours_path(@link.id), empty: "No clicks found" %>
+    </div>
+    <div class="w-1/2 border border-blue-900 rounded bg-slate-100 p-4 mb-4">
+      <p class="text-sm mb-4">Most popular days of week</p>
+      <%= bar_chart link_clicks_most_popular_days_of_week_path(@link.id), empty: "No clicks found" %>
+    </div>
   </div>
 </div>
