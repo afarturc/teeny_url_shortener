@@ -3,6 +3,7 @@
 class LinksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_links, only: %i[index]
+  before_action :set_link, only: %i[destroy]
 
   def index; end
 
@@ -14,7 +15,7 @@ class LinksController < ApplicationController
     result = CreateLink.new(link_params, current_user.id).perform
     @link = result.link
 
-    if result.success?
+    if @result.success?
       respond_to do |format|
         format.turbo_stream
         format.json { render json: { link: @link }, status: :created }
@@ -30,10 +31,29 @@ class LinksController < ApplicationController
     end
   end
 
+  def destroy
+    result = DestroyLink.new(@link).perform
+
+    if result.success?
+      respond_to do |format|
+        format.turbo_stream
+        format.json { head :ok }
+      end
+    else
+      respond_to do |format|
+        format.json { head :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def set_links
     @links = current_user.links.order(created_at: :desc)
+  end
+
+  def set_link
+    @link = Link.find(params[:id])
   end
 
   def link_params

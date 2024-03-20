@@ -113,4 +113,31 @@ RSpec.describe 'Links', type: :request do
       end
     end
   end
+
+  describe 'DELETE #destroy' do
+    context 'when logged in' do
+      include_context 'with logged user'
+
+      let!(:link) { create(:link) }
+
+      it 'deletes link' do
+        aggregate_failures do
+          expect { delete link_path(link.id), as: :json }.to change(Link, :count).by(-1)
+          expect(response).to have_http_status(:ok)
+        end
+      end
+    end
+
+    context 'when logged out' do
+      let!(:link) { create(:link) }
+
+      it 'redirects to login' do
+        aggregate_failures do
+          expect { delete link_path(link.id), as: :json }.not_to change(Link, :count)
+          expect(response).to have_http_status(:unauthorized)
+          expect(JSON.parse(response.body)['error']).to eq('You need to sign in or sign up before continuing.')
+        end
+      end
+    end
+  end
 end
