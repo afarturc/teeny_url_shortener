@@ -31,6 +31,16 @@ class StatisticsController < ApplicationController
     end
   end
 
+  def clicks_most_popular_languages
+    result = ClicksMostPopularLanguages.new(@link).perform
+
+    if result.success?
+      render json: result.clicks
+    else
+      render json: nil
+    end
+  end
+
   private
 
   def set_link
