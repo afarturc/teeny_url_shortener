@@ -1,4 +1,5 @@
 class StatisticsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_link
 
   def clicks_last_30_days

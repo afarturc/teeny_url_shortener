@@ -8,13 +8,13 @@ class ClicksController < ApplicationController
     if result.success?
       respond_to do |format|
         format.html { redirect_to @link.original_url, allow_other_host: true }
-        format.json { render json: { click: result.click }, status: :created }
+        format.json { render json: { link: @link, click: result.click }, status: :created }
       end
     else
       respond_to do |format|
         format.html do
           flash.now[:alert] = result.errors
-          render :new, status: :unprocessable_entity
+          redirect_to root_path
         end
         format.json { render json: { errors: result.errors }, status: :unprocessable_entity }
       end
