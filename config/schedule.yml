@@ -1,4 +1,4 @@
 enqueue_expired_link_email_job:
-  cron: "*/5 * * * *"
+  cron: "0 2 * * *"
   class: "EnqueueExpiredLinkEmailJob"
   queue: "default"

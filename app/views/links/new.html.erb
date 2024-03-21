@@ -1,5 +1,5 @@
 <%= turbo_frame_tag("new_short_link") do %>
-    <%= form_with(model: @link, class: "flex items-center gap-2 w-full") do |form| %>
+    <%= form_with(model: @link, class: "flex items-center gap-2 w-full", data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" }) do |form| %>
       <div class="w-3/4">
           <%= form.text_field :original_url, placeholder: "Enter link here", class: "block bg-slate-100 shadow rounded-md w-full" %>
       </div>
