@@ -29,7 +29,7 @@ class ClicksController < ApplicationController
       device_ip: request.remote_ip,
       system: user_agent.os,
       browser: user_agent.browser,
-      language: request.accept_language.split(';')[0].split(',')[1].upcase,
+      language: request.accept_language ? request.accept_language.split(';')[0].split(',')[1].upcase : request.accept_language,
       platform: user_agent.platform
     }
   end

@@ -5,6 +5,8 @@ class Link < ApplicationRecord
   validate :expires_at_cannot_be_in_the_past
   validates :original_url, :short_url, presence: true
 
+  scope :expired, -> { where('expires_at < ?', Date.today) }
+
   def expired?
     expires_at.present? && expires_at < Date.today
   end

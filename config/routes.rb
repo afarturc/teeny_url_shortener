@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -6,7 +8,9 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get 'up' => 'rails/health#show', as: :rails_health_check
 
-  get '/:short_url', to: 'clicks#redirect', as: 'redirect'
+  get 'ty/:short_url', to: 'clicks#redirect', as: 'redirect'
+
+  mount Sidekiq::Web => '/sidekiq' # mount Sidekiq::Web in your Rails app
 
   resources :links do
     get '/statistics/clicks_last_30_days', to: 'statistics#clicks_last_30_days', as: 'clicks_last_30_days'

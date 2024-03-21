@@ -1,0 +1,4 @@
+enqueue_expired_link_email_job:
+  cron: "*/5 * * * *"
+  class: "EnqueueExpiredLinkEmailJob"
+  queue: "default"

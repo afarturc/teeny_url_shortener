@@ -5,10 +5,12 @@ RSpec.describe 'Clicks', type: :request do
     let!(:link) { create(:link) }
 
     context 'when valid request' do
-      it 'redirects to the original url and creates click' do
-        user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
-        accept_language = 'en-US,en;q=0.9'
+      let(:user_agent) do
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+      end
+      let(:accept_language) { 'en-US,en;q=0.9' }
 
+      it 'redirects to the original url and creates click' do
         get redirect_path(short_url: link.short_url),
             headers: { 'User-Agent': user_agent, 'HTTP_ACCEPT_LANGUAGE': accept_language }
 
