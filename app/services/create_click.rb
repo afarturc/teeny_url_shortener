@@ -17,5 +17,5 @@ class CreateClick
 
   private
 
-  attr_accessor :link, :click_params
+  attr_reader :link, :click_params
 end

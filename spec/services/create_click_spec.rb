@@ -8,15 +8,7 @@ RSpec.describe CreateClick do
   describe '#perform' do
     let!(:link) { create(:link) }
     context 'when params are valid' do
-      let(:click_params) do
-        {
-          device_ip: FFaker::Internet.ip_v4_address,
-          system: 'Desktop',
-          browser: ['Firefox', 'Google Chrome', 'Safari'].sample,
-          language: %w[EN PT FR].sample,
-          platform: 'Mac OS'
-        }
-      end
+      let(:click_params) { attributes_for(:click) }
 
       it 'creates a click' do
         aggregate_failures do
@@ -27,15 +19,7 @@ RSpec.describe CreateClick do
     end
 
     context 'when params are invalid' do
-      let(:click_params) do
-        {
-          device_ip: FFaker::Internet.ip_v4_address,
-          system: nil,
-          browser: ['Firefox', 'Google Chrome', 'Safari'].sample,
-          language: %w[EN PT FR].sample,
-          platform: nil
-        }
-      end
+      let(:click_params) { attributes_for(:click, system: nil, platform: nil) }
       let(:expected_error_messages) do
         ["System can't be blank", "Platform can't be blank"]
       end
