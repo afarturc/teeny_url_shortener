@@ -1,0 +1,45 @@
+<div class="flex flex-col w-1/2 mx-auto">
+  <div class="flex flex-row w-full mb-2">
+    <h1 class="font-bold text-xl"><%= @link.short_url %></h1>
+  </div>
+  <p class="mb-3"><%= @link.original_url %></p>
+  <div class="flex flex-row gap-2 mb-8 items-center">
+    <%= inline_svg_tag("calendar.svg", class: "size-5") %>
+    <p><%= @link.created_at.to_date %></p>
+  </div>
+  <div class="border border-blue-900 rounded bg-slate-100 p-4 mb-4">
+    <div class="flex flex-row justify-between mb-8">
+      <div class="flex flex-row">
+        <div class="flex flex-col mr-12">
+          <p class="text-sm">Total clicks</p>
+          <p class="font-bold text-sm"><%= @link.clicks.count %></p>
+        </div>
+        <div class="flex flex-col">
+          <p class="text-sm">Last click</p>
+          <p class="font-bold text-sm">
+            <% if @link.clicks.last %>
+              <%= time_ago_in_words(@link.clicks.last.created_at) %>
+            <% else %>
+              No one clicked
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <%= line_chart link_statistics_path(action: 'clicks_last_30_days', link_id: @link.id), empty: "No clicks found for the last 30 days" %>
+  </div>
+  <div class="flex flex-row gap-4">
+    <div class="w-1/2 border border-blue-900 rounded bg-slate-100 p-4 mb-4">
+      <p class="text-sm mb-4">Most popular hours</p>
+      <%= column_chart link_statistics_path(action: 'clicks_most_popular_hours', link_id: @link.id), empty: "No clicks found" %>
+    </div>
+    <div class="w-1/2 border border-blue-900 rounded bg-slate-100 p-4 mb-4">
+      <p class="text-sm mb-4">Most popular days of week</p>
+      <%= bar_chart link_statistics_path(action: 'clicks_most_popular_days_of_week', link_id: @link.id), empty: "No clicks found" %>
+    </div>
+  </div>
+  <div class="w-full border border-blue-900 rounded bg-slate-100 p-4 mb-4">
+    <p class="text-sm mb-4">Most popular languages</p>
+    <%= pie_chart link_statistics_path(action: 'clicks_most_popular_languages', link_id: @link.id), empty: "No clicks found" %>
+  </div>
+</div>

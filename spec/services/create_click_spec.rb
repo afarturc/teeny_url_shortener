@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe CreateClick do
-  let(:create_click) { described_class.new(link, click_params).perform }
+  let(:create_click) { described_class.new(link_id, click_params).perform }
 
   describe '#perform' do
-    let!(:link) { create(:link) }
+    let!(:link_id) { create(:link).id }
     context 'when params are valid' do
       let(:click_params) { attributes_for(:click) }
 

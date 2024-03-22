@@ -3,7 +3,7 @@ class ClicksController < ApplicationController
   before_action :set_link
 
   def redirect
-    result = CreateClick.new(@link, click_params).perform
+    result = CreateClick.new(@link.id, click_params).perform
 
     if result.success?
       respond_to do |format|
@@ -29,7 +29,7 @@ class ClicksController < ApplicationController
       device_ip: request.remote_ip,
       system: user_agent.os,
       browser: user_agent.browser,
-      language: request.env['HTTP_ACCEPT_LANGUAGE'],
+      language: request.accept_language,
       platform: user_agent.platform
     }
   end

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Service class to create a new link and return a result to the link controller
 class CreateLink
   include Base62
 

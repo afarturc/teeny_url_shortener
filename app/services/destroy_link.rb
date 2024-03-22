@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DestroyLink
   Result = Struct.new(:success?, :link, keyword_init: true)
 

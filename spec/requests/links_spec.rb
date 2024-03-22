@@ -11,7 +11,7 @@ RSpec.describe 'Links', type: :request do
       end
 
       it 'returns existing short links' do
-        get links_path
+        get root_path
 
         aggregate_failures do
           expect(response).to have_http_status(:ok)
@@ -24,7 +24,7 @@ RSpec.describe 'Links', type: :request do
 
     context 'when logged out' do
       it 'redirects to login' do
-        get links_path
+        get root_path
 
         aggregate_failures do
           expect(response).to redirect_to(new_user_session_path)
