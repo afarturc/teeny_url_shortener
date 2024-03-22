@@ -9,13 +9,7 @@ Rails.application.routes.draw do
   get '/:short_url', to: 'clicks#redirect', as: 'redirect'
 
   resources :links, only: %i[index show new create destroy] do
-    get '/statistics/clicks_last_30_days', to: 'statistics#clicks_last_30_days', as: 'clicks_last_30_days'
-    get '/statistics/clicks_most_popular_days_of_week', to: 'statistics#clicks_most_popular_days_of_week',
-                                                        as: 'clicks_most_popular_days_of_week'
-    get '/statistics/clicks_most_popular_hours', to: 'statistics#clicks_most_popular_hours',
-                                                 as: 'clicks_most_popular_hours'
-    get '/statistics/clicks_most_popular_languages', to: 'statistics#clicks_most_popular_languages',
-                                                     as: 'clicks_most_popular_languages'
+    get '/statistics/:action', controller: 'statistics', as: 'statistics'
   end
 
   # Defines the root path route ("/")

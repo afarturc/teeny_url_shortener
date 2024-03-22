@@ -54,19 +54,19 @@ gem 'devise', '~> 4.9'
 gem 'sidekiq', '~> 7.2'
 
 # https://github.com/sidekiq-cron/sidekiq-cron
-gem 'sidekiq-cron'
+gem 'sidekiq-cron', '~> 1.12.0'
 
 # https://github.com/gshutler/useragent
 gem 'useragent', '~> 0.16.10'
 
 # https://github.com/jamesmartin/inline_svg
-gem 'inline_svg'
+gem 'inline_svg', '~> 1.9.0'
 
 # https://github.com/ankane/chartkick
-gem 'chartkick'
+gem 'chartkick', '~> 5.0.6'
 
 # https://github.com/ankane/groupdate
-gem 'groupdate'
+gem 'groupdate', '~> 6.4.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

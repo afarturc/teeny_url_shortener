@@ -26,20 +26,20 @@
         </div>
       </div>
     </div>
-    <%= line_chart link_clicks_last_30_days_path(@link.id), empty: "No clicks found for the last 30 days" %>
+    <%= line_chart link_statistics_path(action: 'clicks_last_30_days', link_id: @link.id), empty: "No clicks found for the last 30 days" %>
   </div>
   <div class="flex flex-row gap-4">
     <div class="w-1/2 border border-blue-900 rounded bg-slate-100 p-4 mb-4">
       <p class="text-sm mb-4">Most popular hours</p>
-      <%= column_chart link_clicks_most_popular_hours_path(@link.id), empty: "No clicks found" %>
+      <%= column_chart link_statistics_path(action: 'clicks_most_popular_hours', link_id: @link.id), empty: "No clicks found" %>
     </div>
     <div class="w-1/2 border border-blue-900 rounded bg-slate-100 p-4 mb-4">
       <p class="text-sm mb-4">Most popular days of week</p>
-      <%= bar_chart link_clicks_most_popular_days_of_week_path(@link.id), empty: "No clicks found" %>
+      <%= bar_chart link_statistics_path(action: 'clicks_most_popular_days_of_week', link_id: @link.id), empty: "No clicks found" %>
     </div>
   </div>
   <div class="w-full border border-blue-900 rounded bg-slate-100 p-4 mb-4">
     <p class="text-sm mb-4">Most popular languages</p>
-    <%= pie_chart link_clicks_most_popular_languages_path(@link.id), empty: "No clicks found" %>
+    <%= pie_chart link_statistics_path(action: 'clicks_most_popular_languages', link_id: @link.id), empty: "No clicks found" %>
   </div>
 </div>

@@ -3,7 +3,7 @@ class ClicksController < ApplicationController
   before_action :set_link
 
   def redirect
-    result = CreateClick.new(@link, click_params).perform
+    result = CreateClick.new(@link.id, click_params).perform
 
     if result.success?
       respond_to do |format|

@@ -13,7 +13,7 @@ RSpec.describe 'Statistics', type: :request do
         end
 
         it 'returns clicks count for the past 30 days' do
-          get link_clicks_last_30_days_path(link_id), as: :json
+          get link_statistics_path(action: 'clicks_last_30_days', link_id:), as: :json
           expect(response).to be_successful
           expect(JSON.parse(response.body)).not_to be_empty
         end
@@ -21,7 +21,7 @@ RSpec.describe 'Statistics', type: :request do
 
       context 'when clicks are not found' do
         it 'returns nil' do
-          get link_clicks_last_30_days_path(link_id), as: :json
+          get link_statistics_path(action: 'clicks_last_30_days', link_id:), as: :json
           expect(response).to be_successful
           expect(response.body).to eq('null')
         end
@@ -32,7 +32,7 @@ RSpec.describe 'Statistics', type: :request do
       let!(:link_id) { create(:link).id }
 
       it 'redirects to login' do
-        get link_clicks_last_30_days_path(link_id)
+        get link_statistics_path(action: 'clicks_last_30_days', link_id:)
 
         aggregate_failures do
           expect(response).to redirect_to(new_user_session_path)
@@ -55,7 +55,7 @@ RSpec.describe 'Statistics', type: :request do
         end
 
         it 'returns clicks count for most popular hours of the day' do
-          get link_clicks_most_popular_hours_path(link_id), as: :json
+          get link_statistics_path(action: 'clicks_most_popular_hours', link_id:), as: :json
           expect(response).to be_successful
           expect(JSON.parse(response.body)).not_to be_empty
         end
@@ -63,7 +63,7 @@ RSpec.describe 'Statistics', type: :request do
 
       context 'when clicks are not found' do
         it 'returns nil' do
-          get link_clicks_most_popular_hours_path(link_id), as: :json
+          get link_statistics_path(action: 'clicks_most_popular_hours', link_id:), as: :json
           expect(response).to be_successful
           expect(response.body).to eq('null')
         end
@@ -74,7 +74,7 @@ RSpec.describe 'Statistics', type: :request do
       let!(:link_id) { create(:link).id }
 
       it 'redirects to login' do
-        get link_clicks_most_popular_hours_path(link_id)
+        get link_statistics_path(action: 'clicks_most_popular_hours', link_id:)
 
         aggregate_failures do
           expect(response).to redirect_to(new_user_session_path)
@@ -97,7 +97,7 @@ RSpec.describe 'Statistics', type: :request do
         end
 
         it 'returns clicks count for most popular days of the week' do
-          get link_clicks_most_popular_days_of_week_path(link_id), as: :json
+          get link_statistics_path(action: 'clicks_most_popular_days_of_week', link_id:), as: :json
           expect(response).to be_successful
           expect(JSON.parse(response.body)).not_to be_empty
         end
@@ -105,7 +105,7 @@ RSpec.describe 'Statistics', type: :request do
 
       context 'when clicks are not found' do
         it 'returns nil' do
-          get link_clicks_most_popular_days_of_week_path(link_id), as: :json
+          get link_statistics_path(action: 'clicks_most_popular_days_of_week', link_id:), as: :json
           expect(response).to be_successful
           expect(response.body).to eq('null')
         end
@@ -116,7 +116,7 @@ RSpec.describe 'Statistics', type: :request do
       let!(:link_id) { create(:link).id }
 
       it 'redirects to login' do
-        get link_clicks_most_popular_days_of_week_path(link_id)
+        get link_statistics_path(action: 'clicks_most_popular_days_of_week', link_id:)
 
         aggregate_failures do
           expect(response).to redirect_to(new_user_session_path)
@@ -139,7 +139,7 @@ RSpec.describe 'Statistics', type: :request do
         end
 
         it 'returns clicks count for most popular languages' do
-          get link_clicks_most_popular_languages_path(link_id), as: :json
+          get link_statistics_path(action: 'clicks_most_popular_languages', link_id:), as: :json
           expect(response).to be_successful
           expect(JSON.parse(response.body)).not_to be_empty
         end
@@ -147,7 +147,7 @@ RSpec.describe 'Statistics', type: :request do
 
       context 'when clicks are not found' do
         it 'returns nil' do
-          get link_clicks_most_popular_languages_path(link_id), as: :json
+          get link_statistics_path(action: 'clicks_most_popular_languages', link_id:), as: :json
           expect(response).to be_successful
           expect(response.body).to eq('null')
         end
@@ -158,7 +158,7 @@ RSpec.describe 'Statistics', type: :request do
       let!(:link_id) { create(:link).id }
 
       it 'redirects to login' do
-        get link_clicks_most_popular_languages_path(link_id)
+        get link_statistics_path(action: 'clicks_most_popular_languages', link_id:)
 
         aggregate_failures do
           expect(response).to redirect_to(new_user_session_path)
