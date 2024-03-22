@@ -49,7 +49,7 @@ class LinksController < ApplicationController
       respond_to do |format|
         format.html do
           flash.now[:alert] = result.errors
-          render :new, status: :unprocessable_entity
+          render :edit, status: :unprocessable_entity
         end
         format.json { render json: { errors: result.errors }, status: :unprocessable_entity }
       end
