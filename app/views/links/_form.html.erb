@@ -1,17 +1,17 @@
 <%= form_with(model: @link, class: "flex flex-col w-full items-center justify-center") do |form| %>
-    <div class="mb-6 w-1/2">
+    <div class="mb-6 w-full md:w-1/2">
         <%= form.label :name %>
         <%= form.text_field :name, class: "block shadow rounded w-full" %>
     </div>
-    <div class="mb-6 w-1/2">
+    <div class="mb-6 w-full md:w-1/2"">
         <%= form.label :description %>
-        <%= form.text_area :description, rows: 5, class: "block shadow rounde w-full" %>
+        <%= form.text_area :description, rows: 5, class: "block shadow rounded w-full" %>
     </div>
-    <div class="mb-6 w-1/2">
+    <div class="mb-6 w-full md:w-1/2"">
         <%= form.label :expires_at %>
         <%= form.date_field :expires_at, class: "block shadow rounded w-full" %>
     </div>
-    <div class="w-1/2">
+    <div class="w-full md:w-1/2"">
         <%= form.submit class: "w-full rounded-lg py-3 bg-blue-900 hover:bg-blue-800 text-white font-medium cursor-pointer" %>
     </div>
 <% end %>

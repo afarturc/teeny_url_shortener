@@ -12,16 +12,28 @@
                 </div>
             <% elsif type == "alert" %>
                 <div class="fixed bottom-0 right-8">
-                <% content.each do |message| %>
-                    <div 
-                        class="flex bg-red-50 w-64 p-3 mb-8 rounded-lg shadow cursor-pointer"
-                        data-dismiss-target="alert"
-                        data-action="click->dismiss#triggerDismiss"
-                    >
-                    <%= image_tag("xmark-circle.svg", class: "mr-1 w-4") %>
-                    <p><%= message %></p>
-                    </div>
-                <% end %>
+                    <% if content.is_a? String %>
+                            <div 
+                                class="flex bg-red-50 w-64 p-3 mb-8 rounded-lg shadow cursor-pointer"
+                                data-dismiss-target="alert"
+                                data-action="click->dismiss#triggerDismiss"
+                            >
+                            <%= image_tag("xmark-circle.svg", class: "mr-1 w-4") %>
+                            <p><%= content %></p>
+                            </div>
+                    <% else %>
+                        <% content.each do |message| %>
+
+                            <div 
+                                class="flex bg-red-50 w-64 p-3 mb-8 rounded-lg shadow cursor-pointer"
+                                data-dismiss-target="alert"
+                                data-action="click->dismiss#triggerDismiss"
+                            >
+                            <%= image_tag("xmark-circle.svg", class: "mr-1 w-4") %>
+                            <p><%= message %></p>
+                            </div>
+                        <% end %>
+                    <% end %>
                 </div>
             <% end %>
         </div>

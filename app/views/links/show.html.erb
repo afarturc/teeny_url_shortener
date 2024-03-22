@@ -1,11 +1,11 @@
-<div class="flex flex-col w-1/2 mx-auto">
+<div class="flex flex-col w-3/4 lg:w-1/2 mx-auto">
   <% if !@link.name.blank? %>
-    <div class="flex flex-row w-full justify-evenly mb-2">
-      <div class="flex flex-col w-1/2">
+    <div class="flex flex-col gap-2 lg:flex-row w-full justify-evenly mb-2">
+      <div class="flex flex-col md:w-1/2 w-full">
         <h1 class="font-bold text-xl" ><%= @link.name %></h1>
         <p class="text-lg text-slate-700"><%= @link.description %></p>
       </div>
-      <div class="flex flex-col w-1/2">
+      <div class="flex flex-col md:w-1/2 w-full">
         <h2 class="font-bold text-lg">
             <%= link_to(redirect_path(@link.short_url), redirect_path(@link.short_url), data: { turbo: false }, class: "text-blue-900 hover:text-blue-800 hover:underline") %>
         </h2>
@@ -13,7 +13,7 @@
       </div>
     </div>
   <% else %>
-    <div class="flex flex-col w-1/2">
+    <div class="flex flex-col w-3/4 md:w-1/2">
       <h2 class="font-bold text-xl">
           <%= link_to(redirect_path(@link.short_url), redirect_path(@link.short_url), data: { turbo: false }, class: "text-blue-900 hover:text-blue-800 hover:underline") %>
       </h2>
@@ -24,7 +24,7 @@
     <%= inline_svg_tag("calendar.svg", class: "size-5") %>
     <p><%= @link.created_at.to_date %></p>
   </div>
-  <div class="border border-blue-900 rounded bg-slate-100 p-4 mb-4">
+  <div class="w-full border border-blue-900 rounded bg-slate-100 p-4 mb-4">
     <div class="flex flex-row justify-between mb-8">
       <div class="flex flex-row">
         <div class="flex flex-col mr-12">
@@ -45,12 +45,12 @@
     </div>
     <%= line_chart link_clicks_last_30_days_path(@link.id), empty: "No clicks found for the last 30 days" %>
   </div>
-  <div class="flex flex-row gap-4">
-    <div class="w-1/2 border border-blue-900 rounded bg-slate-100 p-4 mb-4">
+  <div class="flex flex-col lg:flex-row gap-4">
+    <div class="w-full lg:w-1/2 border border-blue-900 rounded bg-slate-100 p-4 mb-4">
       <p class="text-sm mb-4">Most popular hours</p>
       <%= column_chart link_clicks_most_popular_hours_path(@link.id), empty: "No clicks found" %>
     </div>
-    <div class="w-1/2 border border-blue-900 rounded bg-slate-100 p-4 mb-4">
+    <div class="w-full lg:w-1/2 border border-blue-900 rounded bg-slate-100 p-4 mb-4">
       <p class="text-sm mb-4">Most popular days of week</p>
       <%= bar_chart link_clicks_most_popular_days_of_week_path(@link.id), empty: "No clicks found" %>
     </div>
