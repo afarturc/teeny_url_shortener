@@ -3,11 +3,13 @@
 class LinksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_links, only: %i[index]
-  before_action :set_link, only: %i[show destroy]
+  before_action :set_link, only: %i[show destroy edit update]
 
   def index; end
 
   def show; end
+
+  def edit; end
 
   def new
     @link = Link.new
@@ -27,6 +29,27 @@ class LinksController < ApplicationController
         format.html do
           flash.now[:alert] = result.errors
           render :new, status: :unprocessable_entity
+        end
+        format.json { render json: { errors: result.errors }, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    result = UpdateLink.new(@link, link_params).perform
+
+    if result.success?
+      respond_to do |format|
+        format.html do
+          redirect_to(root_path)
+        end
+        format.json { render json: { link: @link }, status: :ok }
+      end
+    else
+      respond_to do |format|
+        format.html do
+          flash.now[:alert] = result.errors
+          render :edit, status: :unprocessable_entity
         end
         format.json { render json: { errors: result.errors }, status: :unprocessable_entity }
       end
@@ -59,6 +82,6 @@ class LinksController < ApplicationController
   end
 
   def link_params
-    params.require(:link).permit(:name, :description, :original_url)
+    params.require(:link).permit(:name, :description, :original_url, :password, :expires_at)
   end
 end

@@ -1,8 +1,25 @@
 <div class="flex flex-col w-1/2 mx-auto">
-  <div class="flex flex-row w-full mb-2">
-    <h1 class="font-bold text-xl"><%= @link.short_url %></h1>
-  </div>
-  <p class="mb-3"><%= @link.original_url %></p>
+  <% if !@link.name.blank? %>
+    <div class="flex flex-row w-full justify-evenly mb-2">
+      <div class="flex flex-col w-1/2">
+        <h1 class="font-bold text-xl" ><%= @link.name %></h1>
+        <p class="text-lg text-slate-700"><%= @link.description %></p>
+      </div>
+      <div class="flex flex-col w-1/2">
+        <h2 class="font-bold text-lg">
+            <%= link_to(redirect_path(@link.short_url), redirect_path(@link.short_url), data: { turbo: false }, class: "text-blue-900 hover:text-blue-800 hover:underline") %>
+        </h2>
+        <p class="text-md text-slate-700"><%= @link.original_url %></p>
+      </div>
+    </div>
+  <% else %>
+    <div class="flex flex-col w-1/2">
+      <h2 class="font-bold text-xl">
+          <%= link_to(redirect_path(@link.short_url), redirect_path(@link.short_url), data: { turbo: false }, class: "text-blue-900 hover:text-blue-800 hover:underline") %>
+      </h2>
+      <p class="mb-3 text-slate-700"><%= @link.original_url %></p>
+    </div>
+  <% end %>
   <div class="flex flex-row gap-2 mb-8 items-center">
     <%= inline_svg_tag("calendar.svg", class: "size-5") %>
     <p><%= @link.created_at.to_date %></p>

@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'Links', type: :request do
   describe 'GET #index' do
+    let(:user_agent) do
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+    end
+    let(:accept_language) { 'en-US,en;q=0.9' }
+
     context 'when logged in' do
       include_context 'with logged user'
 
@@ -11,7 +16,7 @@ RSpec.describe 'Links', type: :request do
       end
 
       it 'returns existing short links' do
-        get root_path
+        get root_path, headers: { 'User-Agent': user_agent, 'HTTP_ACCEPT_LANGUAGE': accept_language }
 
         aggregate_failures do
           expect(response).to have_http_status(:ok)
@@ -24,7 +29,7 @@ RSpec.describe 'Links', type: :request do
 
     context 'when logged out' do
       it 'redirects to login' do
-        get root_path
+        get root_path, headers: { 'User-Agent': user_agent, 'HTTP_ACCEPT_LANGUAGE': accept_language }
 
         aggregate_failures do
           expect(response).to redirect_to(new_user_session_path)
@@ -110,6 +115,55 @@ RSpec.describe 'Links', type: :request do
         expect { post links_path, as: :json }.not_to change(Link, :count)
         expect(response).to have_http_status(:unauthorized)
         expect(JSON.parse(response.body)['error']).to eq('You need to sign in or sign up before continuing.')
+      end
+    end
+  end
+
+  describe 'GET #edit' do
+  end
+
+  describe 'PATCH #update' do
+    context 'when logged in' do
+      include_context 'with logged user'
+
+      let!(:link) { create(:link, user:) }
+
+      context 'when params are valid' do
+        let(:link_params) do
+          {
+            link: {
+              name: FFaker::Lorem.word,
+              description: FFaker::Lorem.sentence
+            }
+          }
+        end
+
+        it 'updates a link and redirects' do
+          aggregate_failures do
+            expect { patch link_path(link, link_params) }.not_to change(Link, :count)
+            expect(response).to have_http_status(:found)
+            expect(response).to redirect_to(root_path)
+          end
+        end
+      end
+
+      context 'when params are invalid' do
+        let(:invalid_params) do
+          {
+            link: {
+              original_url: nil
+            }
+          }
+        end
+        let(:validation_errors) { ["Original url can't be blank"] }
+
+        it 'does not update a book' do
+          aggregate_failures do
+            expect { patch link_path(link, invalid_params) }.not_to change(Link, :count)
+            expect(response).to have_http_status(:unprocessable_entity)
+            expect(flash[:alert]).to eq(validation_errors)
+          end
+        end
       end
     end
   end

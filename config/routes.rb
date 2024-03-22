@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   get '/:short_url', to: 'clicks#redirect', as: 'redirect'
 
-  resources :links, only: %i[index show new create destroy] do
+  resources :links do
     get '/statistics/:action', controller: 'statistics', as: 'statistics'
   end
 
