@@ -43,13 +43,13 @@ class LinksController < ApplicationController
         format.html do
           redirect_to(root_path)
         end
-        format.json { render json: { link: @link }, status: :created }
+        format.json { render json: { link: @link }, status: :ok }
       end
     else
       respond_to do |format|
         format.html do
           flash.now[:alert] = result.errors
-          render :new, status: :unprocessable_entity
+          render :edit, status: :unprocessable_entity
         end
         format.json { render json: { errors: result.errors }, status: :unprocessable_entity }
       end
